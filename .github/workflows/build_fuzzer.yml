@@ -47,6 +47,8 @@ jobs:
 
       - name: Setup Ccache
         uses: hendrikmuhs/ccache-action@main
+        with:
+          key: 'duckdb-5175b7d33c7f1fe8852ffc6eb2a61bfd76928803'
 
       - id: find-hash
         run: echo "hash=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
