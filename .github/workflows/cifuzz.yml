@@ -17,6 +17,7 @@ jobs:
     name: Fuzzer
     needs:
     - build-duckdb
+    if: false # don't actually fuzz for this test
     strategy:
       fail-fast: false
       matrix:
@@ -56,7 +57,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          repository: duckdb/duckdb_sqlsmith
+          repository: c-herrewijn/duckdb_sqlsmith
+          ref: 'test'
           path: duckdb_sqlsmith
           sparse-checkout: |
             scripts
