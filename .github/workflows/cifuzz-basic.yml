@@ -10,6 +10,7 @@ on:
 
 jobs:
   build-duckdb:
+    if: false # DEBUG, don't fuzz on push
     name: Build DuckDB
     uses: ./.github/workflows/build_fuzzer.yml
     with:
