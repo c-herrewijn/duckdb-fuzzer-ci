@@ -68,9 +68,20 @@ jobs:
         with:
           name: duckdb
 
+      - name: Dummy Step
+        shell: bash
+        run: |
+            echo "dummy test"
+            pwd
+            cd duckdb-sqlsmith
+            python3 scripts/dummy.py
+            python3 scripts/dummy.py --duckfuzz --alltypes --shell=../duckdb
+
       - name: Fuzz
         shell: bash
         run: |
+            echo "test: running run_fuzzer.py ..."
+            pwd
             chmod +x duckdb
             cd duckdb-sqlsmith
             python3 scripts/run_fuzzer.py --duckfuzz --alltypes --shell=../duckdb
