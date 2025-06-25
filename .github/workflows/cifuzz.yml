@@ -10,7 +10,7 @@ jobs:
     uses: ./.github/workflows/build_fuzzer.yml
     with:
       git_url: c-herrewijn/duckdb-sqlsmith
-      git_tag: main
+      git_tag: 'test'
       timeout-minutes: 120
 
   fuzzer:
