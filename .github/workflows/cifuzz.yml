@@ -57,9 +57,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          repository: c-herrewijn/duckdb_sqlsmith
+          repository: c-herrewijn/duckdb-sqlsmith
           ref: 'test'
-          path: duckdb_sqlsmith
+          path: duckdb-sqlsmith
           sparse-checkout: |
             scripts
 
@@ -72,5 +72,5 @@ jobs:
         shell: bash
         run: |
             chmod +x duckdb
-            cd duckdb_sqlsmith
+            cd duckdb-sqlsmith
             python3 scripts/run_fuzzer.py --duckfuzz --alltypes --shell=../duckdb

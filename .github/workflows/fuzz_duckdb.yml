@@ -38,11 +38,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: ${{ inputs.timeout-minutes }}
     steps:
-      - name: checkout duckdb_sqlsmith
+      - name: checkout duckdb-sqlsmith
         uses: actions/checkout@v4
         with:
-          repository: duckdb/duckdb_sqlsmith
-          path: duckdb_sqlsmith
+          repository: duckdb/duckdb-sqlsmith
+          path: duckdb-sqlsmith
           sparse-checkout: |
             scripts
 
@@ -60,7 +60,7 @@ jobs:
           chmod +x duckdb
           runtime="1 minute"
           endtime=$(date -ud "$runtime" +%s)
-          cd duckdb_sqlsmith
+          cd duckdb-sqlsmith
 
           while [[ $(date -u +%s) -le $endtime ]]
           do
@@ -71,11 +71,11 @@ jobs:
           done
 
       - name: Rename Artifact
-        run: mv duckdb_sqlsmith/sqlsmith.complete.log duckdb_sqlsmith/fuzz_complete_logs_${{ inputs.fuzzer }}_${{ inputs.data }}_ev_is_${{ inputs.enable_verification }}.sql
+        run: mv duckdb-sqlsmith/sqlsmith.complete.log duckdb-sqlsmith/fuzz_complete_logs_${{ inputs.fuzzer }}_${{ inputs.data }}_ev_is_${{ inputs.enable_verification }}.sql
 
       - name: Upload fuzz_clogs
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: fuzz_complete_logs_${{ inputs.fuzzer }}_${{ inputs.data }}_ev_is_${{ inputs.enable_verification }}.sql
-          path: duckdb_sqlsmith/fuzz_complete_logs_${{ inputs.fuzzer }}_${{ inputs.data }}_ev_is_${{ inputs.enable_verification }}.sql
+          path: duckdb-sqlsmith/fuzz_complete_logs_${{ inputs.fuzzer }}_${{ inputs.data }}_ev_is_${{ inputs.enable_verification }}.sql
