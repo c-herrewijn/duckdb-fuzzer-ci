@@ -50,7 +50,7 @@ jobs:
     - build-duckdb
     runs-on: ubuntu-latest
     env:
-      FUZZEROFDUCKSKEY: ${{ secrets.FUZZEROFDUCKSKEY }}``
+      FUZZEROFDUCKSKEY: ${{ secrets.FUZZEROFDUCKSKEY }}
       DUCKDB_HASH: ${{ needs.build-duckdb.outputs.hash }}
 
     steps:
