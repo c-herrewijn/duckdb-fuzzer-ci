@@ -1,8 +1,8 @@
 name: AFL++ Fuzz DuckDB File Readers
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "42 23 * * *"
+  # schedule:
+  #   - cron: "42 23 * * *"
 
 jobs:
   get-branches:
