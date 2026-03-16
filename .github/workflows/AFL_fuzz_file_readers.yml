@@ -19,7 +19,7 @@ jobs:
   run-aflplusplus-file-fuzzer:
     name: Run AFL++ file fuzzer
     needs: get-branches
-    uses: duckdblabs/duckdb-aflplusplus/.github/workflows/RunFuzzer.yml@main
+    uses: duckdblabs/duckdb-aflplusplus/.github/workflows/RunFuzzer.yml@fix-build-step
     strategy:
       matrix:
         branch: ${{ fromJSON(needs.get-branches.outputs.branches) }}
