@@ -1,0 +1,47 @@
+name: Debug Build DuckDB
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "duckdb branch, tag, or full-length SHA"
+        required: true
+        type: string
+      duckdbRepo:
+        description: "duckdb repository"
+        required: false
+        type: string
+        default: duckdb/duckdb
+
+jobs:
+  debug_build_duckdb:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Print inputs
+        run: |
+          echo ${{ inputs.ref }}
+          echo ${{ inputs.duckdbRepo }}
+      - name: Checkout duckdb
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          repository: ${{ inputs.duckdbRepo }}
+          ref: ${{ inputs.ref }}
+          path: duckdb
+
+      - uses: ./duckdb/.github/actions/cleanup_runner
+
+      - name: DuckDB Build Dependencies
+        shell: bash
+        run: sudo apt-get update -y -qq && sudo apt-get install -y -qq ninja-build ccache mold
+
+      - name: Setup Ccache
+        uses: hendrikmuhs/ccache-action@main
+
+      - name: Build DuckDB
+        working-directory: duckdb
+        env:
+          GEN: ninja
+          EXPORT_DYNAMIC_SYMBOLS: 1
+        shell: bash
+        run: |
+          make debug
